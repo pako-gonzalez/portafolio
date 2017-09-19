@@ -8,8 +8,8 @@ import { ProductsService } from "../../services/products.service";
 })
 export class PortafolioComponent {
 
-  constructor( private _ps:ProductsService ){
-    
+  constructor( public _ps:ProductsService ){
+
   }
 
 }

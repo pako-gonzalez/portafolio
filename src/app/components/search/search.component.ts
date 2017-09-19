@@ -11,7 +11,7 @@ export class SearchComponent {
   text:string = undefined;
 
   constructor(  private route:ActivatedRoute,
-                private _ps:ProductsService) {
+                public _ps:ProductsService) {
     route.params.subscribe( parameters => {
       this.text = parameters['text'];
       _ps.search_product(this.text)
