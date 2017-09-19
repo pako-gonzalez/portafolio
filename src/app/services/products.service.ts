@@ -5,6 +5,7 @@ import { Http } from "@angular/http";
 export class ProductsService {
 
   products:any[] = [];
+  products_filtered:any[] = [];
   loading:boolean = true;
 
   constructor( private http:Http ) {
@@ -13,16 +14,53 @@ export class ProductsService {
 
   public load_products(){
     this.loading = true;
-    this.http.get("https://webpage-7a336.firebaseio.com/products_idx.json")
-      .subscribe( res => {
-        //console.log(res.json());
-        this.products = res.json();
-        this.loading = false;
+
+    let promise = new Promise( ( resolve, reject ) => {
+
+      this.http.get("https://webpage-7a336.firebaseio.com/products_idx.json")
+        .subscribe( res => {
+          //console.log(res.json());
+          this.products = res.json();
+          this.loading = false;
+          resolve();
+      });
+
+
     });
+
+    return promise;
+
+
   }
 
   public load_product( cod:string ){
     return this.http.get(`https://webpage-7a336.firebaseio.com/products/${cod}.json`);
+  }
+
+  public search_product( text:string){
+    console.log("Buscando producto");
+    console.log( this.products.length );
+    if( this.products.length === 0){
+      this.load_products().then( () => {
+        // load finished
+        this.filter_products(text);
+      });
+    } else {
+      this.filter_products(text);
+    }
+
+  }
+
+  private filter_products( text:string ){
+    this.products_filtered = [];
+    text = text.toLowerCase();
+    this.products.forEach( prod => {
+      console.log(prod);
+      if( prod.categoria.indexOf( text ) >= 0 ||
+          prod.titulo.toLowerCase().indexOf( text ) >= 0){
+        this.products_filtered.push( prod );
+      }
+    })
   }
 
 }
