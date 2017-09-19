@@ -21,4 +21,8 @@ export class ProductsService {
     });
   }
 
+  public load_product( cod:string ){
+    return this.http.get(`https://webpage-7a336.firebaseio.com/products/${cod}.json`);
+  }
+
 }
