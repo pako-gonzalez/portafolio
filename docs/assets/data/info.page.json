@@ -1,0 +1,10 @@
+{
+  "title" : "My Page",
+  "email" : "myemail@email.com",
+  "short_name" : "My name",
+  "author_page" : "http://author-page.com",
+  "facebook" : "https://facebook.com",
+  "twitter" : "https://twitter.com",
+  "instagram" : "https://instagram.com",
+  "work_team" : []
+}
