@@ -19,18 +19,12 @@ export class ProductsService {
 
       this.http.get("https://webpage-7a336.firebaseio.com/products_idx.json")
         .subscribe( res => {
-          //console.log(res.json());
           this.products = res.json();
           this.loading = false;
           resolve();
       });
-
-
     });
-
     return promise;
-
-
   }
 
   public load_product( cod:string ){
@@ -38,8 +32,6 @@ export class ProductsService {
   }
 
   public search_product( text:string){
-    console.log("Buscando producto");
-    console.log( this.products.length );
     if( this.products.length === 0){
       this.load_products().then( () => {
         // load finished
@@ -48,14 +40,12 @@ export class ProductsService {
     } else {
       this.filter_products(text);
     }
-
   }
 
   private filter_products( text:string ){
     this.products_filtered = [];
     text = text.toLowerCase();
     this.products.forEach( prod => {
-      console.log(prod);
       if( prod.categoria.indexOf( text ) >= 0 ||
           prod.titulo.toLowerCase().indexOf( text ) >= 0){
         this.products_filtered.push( prod );

@@ -14,7 +14,6 @@ export class HeaderComponent {
   }
 
   search_product( text:string ){
-    //console.log(text);
     this.router.navigate( ['search', text] );
   }
 

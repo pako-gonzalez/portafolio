@@ -14,11 +14,7 @@ export class SearchComponent {
                 private _ps:ProductsService) {
     route.params.subscribe( parameters => {
       this.text = parameters['text'];
-      console.log(this.text);
       _ps.search_product(this.text)
-
     })
   }
-
-
 }
